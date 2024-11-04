@@ -55,22 +55,63 @@ void deleteVillager(map<string, Information> &villagers) {
     cout << "Villager name to delete: ";
     cin >> name;
 
-
-
-
-    
+    if (villagers.erase(name)) {
+        cout << name << " deleted" << endl;
+    } else {
+        cout << name << " not found" << endl;
+    }
 }
 
 void increaseFriendship(map<string, Information> &villagers) {
+    string name;
+    cout << "Villager name to increase friendship: ";
+    cin >> name;
 
+    auto it = villagers.find(name);
+    if (it != villagers.end()) {
+        int &level = get<0>(it->second);
+        if (level < 10) {
+            ++level;
+            cout << "Friendship level of " << name << " increased to " << level << endl;
+        } else {
+            cout << "Friendship level is already 10" << endl;
+        }
+    } else {
+        cout << name << " not found" << endl;
+    }
 }
 
 void decreaseFriendship(map<string, Information> &villagers) {
+    string name;
+    cout << "Villager name to decrease friendship: ";
+    cin >> name;
 
+    auto it = villagers.find(name);
+    if (it != villagers.end()) {
+        int &level = get<0>(it->second);
+        if (level > 0) {
+            --level;
+            cout << "Friendship level of " << name << " decreased to " << level << endl;
+        } else {
+            cout << "Friendship level is already 0" << endl;
+        }
+    } else {
+        cout << name << " not found" << endl;
+    }
 }
 
 void searchVillager(const map<string, Information> &villagers) {
+    string name;
+    cout << "Villager name to search: ";
+    cin >> name;
 
+    auto it = villagers.find(name);
+    if (it != villagers.end()) {
+        cout << "Name: " << it->first << endl;
+        cout << "Friendship level: " << get<0>(it->second) << endl;
+        cout << "Species: " << 
+
+    }
 }
 
 void displayVillagers(const map<string, Information> &villagers) {
