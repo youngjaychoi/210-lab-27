@@ -17,7 +17,35 @@ int main() {
     map<string, Information> villagers;
     int choice;
 
+    do {
+        menu();
+        cin >> choice;
 
+        switch (choice) {
+            case 1:
+                addVillager(villagers);
+                break;
+            case 2:
+                deleteVillager(villagers);
+                break;
+            case 3:
+                increaseFriendship(villagers);
+                break;
+            case 4:
+                decreaseFriendship(villagers);
+                break;
+            case 5:
+                searchVillager(villagers);
+                break;
+            case 6:
+                cout << "Exiting program...." << endl;
+                break;
+            default:
+                cout << "Invalid choice" << endl;
+        }
+
+        displayVillagers(villagers);
+    } while (choice != 6);
 
     return 0;
 }
@@ -109,11 +137,17 @@ void searchVillager(const map<string, Information> &villagers) {
     if (it != villagers.end()) {
         cout << "Name: " << it->first << endl;
         cout << "Friendship level: " << get<0>(it->second) << endl;
-        cout << "Species: " << 
-
+        cout << "Species: " << get<1>(it->second) << endl;
+        cout << "Catchphrase: " << get<2>(it->second) << endl;
+    } else {
+        cout << name << " not found" << endl;
     }
 }
 
 void displayVillagers(const map<string, Information> &villagers) {
-
+    cout << "All villagers:" << endl;
+    for (const auto &pair : villagers) {
+        cout << pair.first << " [" << get<0>(pair.second) << ", " << get<1>(pair.second)
+            << ", " << get<2>(pair.second) << "]" << endl;
+    }
 }
